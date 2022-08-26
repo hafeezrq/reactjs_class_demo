@@ -5,12 +5,22 @@ const el = document.getElementById('root');
 const root = ReactDOM.createRoot(el);
 
 class App extends Component {
-  render() {
+  constructor(props) {
+    super(props);
+
+    this.state = { lat: null, errMessage: null };
+
     window.navigator.geolocation.getCurrentPosition(
-      position => console.log(position.coords.longitude),
-      err => console.log(err)
+      position => this.setState({ lat: position.coords.latitude }),
+      err => this.setState({ errMessage: err.message })
     );
-    return <div>Longitude:</div>;
+  }
+  render() {
+    if (this.state.errMessage && !this.state.lat)
+      return <div>Error: {this.state.errMessage}</div>;
+    if (this.state.lat && !this.state.errMessage)
+      return <div>Longitude: {this.state.lat}</div>;
+    return <div>Loading......</div>;
   }
 }
 
