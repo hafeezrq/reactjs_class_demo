@@ -15,7 +15,8 @@ class App extends Component {
       err => this.setState({ errMessage: err.message })
     );
   }
-  render() {
+
+  renderContents = () => {
     if (this.state.errMessage && !this.state.lat)
       return <div>Error: {this.state.errMessage}</div>;
     if (this.state.lat && !this.state.errMessage)
@@ -25,6 +26,10 @@ class App extends Component {
         </div>
       );
     return <Spinner message='Please allow the location request' />;
+  };
+
+  render() {
+    return <div className='border red'>{this.renderContents()}</div>;
   }
 }
 
