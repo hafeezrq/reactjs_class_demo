@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom/client';
+
 import SeasonDisplay from './SeasonDisplay';
 import Spinner from './Spinner';
+
+import './style/App.css';
 
 const el = document.getElementById('root');
 const root = ReactDOM.createRoot(el);
